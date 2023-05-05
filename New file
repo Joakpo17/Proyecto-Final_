@@ -1,1 +1,82 @@
-print("HOLA)
+
+import random
+import time
+
+print("Bienvenido a su Menu de opciones")
+name = input("Introduzca Su Nombre Para Continuar: ")
+print("Bienvenido " + name)
+
+while True:
+    print("""¿Qué acción desea realizar?
+          Escriba una de las siguientes opciones:
+          1) Piedra, papel o tijeras
+          2) Tirar el dado
+          3) Adivinar el número generado
+          4) 
+          5)Salir""")
+    
+    opcion = input()
+    
+    if opcion == "1":
+        choices = ["piedra", "papel", "tijeras"]
+
+        def determine_winner(player_choice, computer_choice):
+            if player_choice == computer_choice:
+                return "¡Empate!"
+            elif (player_choice == "piedra" and computer_choice == "tijeras") or \
+                 (player_choice == "papel" and computer_choice == "piedra") or \
+                 (player_choice == "tijeras" and computer_choice == "papel"):
+                return "¡Ganaste!"
+            else:
+                return "¡Perdiste!"
+
+        player_choice = ""
+        while player_choice not in choices:
+            player_choice = input("Elige piedra, papel o tijeras: ").lower()
+
+        computer_choice = random.choice(choices)
+
+        result = determine_winner(player_choice, computer_choice)
+
+        print("Tu elección fue " + player_choice + ", y la computadora eligió " + computer_choice + ". " + result)
+    
+    elif opcion == "2":
+        def roll_dice():
+            return random.randint(1, 6)
+
+        dice_roll = roll_dice()
+
+        print("El dado quedó en el número: " + str(dice_roll))
+    
+    elif opcion == "3":
+        def adivina_el_numero():
+            num_generado = random.randint(1, 10)
+            intentos = 0
+
+            while True:
+                num_usuario = int(input("Adivina el número generado entre 1 y 10: "))
+                intentos += 1
+
+                time.sleep(1)
+                if num_usuario == num_generado:
+                    print("¡Felicidades! Adivinaste el número generado en", intentos, "intentos.")
+                    break
+                else:
+                    print("Lo siento, el número que ingresaste no es el correcto.")
+
+            jugar_de_nuevo = input("¿Quieres jugar de nuevo? (s/n): ")
+
+            if jugar_de_nuevo == "s":
+                adivina_el_numero()
+            else:
+                print("¡Gracias por jugar!")
+
+        adivina_el_numero()
+    elif opcion == "4":
+        print(" ")
+    elif opcion == "5":
+        print("Espero que haya disfrutado de este menú, " + name + ". ¡Hasta la próxima!")
+        break
+
+    else:
+        print("Comando desconocido")
