@@ -1,6 +1,9 @@
-
 import random
 import time
+import sys
+import numpy as np
+import string
+import matplotlib.pyplot as plt
 
 print("Bienvenido a su Menu de opciones")
 name = input("Introduzca Su Nombre Para Continuar: ")
@@ -12,8 +15,8 @@ while True:
           1) Piedra, papel o tijeras
           2) Tirar el dado
           3) Adivinar el número generado
-          4) 
-          5)Salir""")
+          4) Grafica matematica
+          5) Salir""")
     
     opcion = input()
     
@@ -66,17 +69,24 @@ while True:
 
             jugar_de_nuevo = input("¿Quieres jugar de nuevo? (s/n): ")
 
-            if jugar_de_nuevo == "s":
+            if jugar_de_nuevo.lower() == "s":
                 adivina_el_numero()
             else:
                 print("¡Gracias por jugar!")
 
         adivina_el_numero()
     elif opcion == "4":
-        print(" ")
+        time.sleep(1) 
+        print("Un gráfico será generado") 
+        time.sleep(0.75) 
+        x = np.linspace(0, 5, 38) 
+        y = 5 + 2 * np.sin(x * 2) 
+  
+        fig, ax = plt.subplots() 
+        ax.plot(x, y, linewidth=1.0) 
+  
+        ax.set(xlim=(0, 5), xticks=np.arange(1, 8), 
+            ylim=(0, 5), yticks=np.arange(1, 8)) 
+        plt.show()
     elif opcion == "5":
-        print("Espero que haya disfrutado de este menú, " + name + ". ¡Hasta la próxima!")
-        break
-
-    else:
-        print("Comando desconocido")
+        print("Espero que haya disfrutado de este menu")
